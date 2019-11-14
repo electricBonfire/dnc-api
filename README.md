@@ -22,7 +22,7 @@ docker/db
 
 
 #### docker-compose.yml
-```
+```yaml
 // ./docker-compose.yml
 
 version: '3.4'
@@ -46,7 +46,7 @@ services:
 
 #### index.php
 
-```
+```php
 // ./index.php
 
 <?php
@@ -58,5 +58,38 @@ printf('Hello %s', $name);
 * run `docker-compose up`
 * connect to your database
 * check the app: `http://localhost`
+
+
+##Building Own Own Docker Image
+  
+The DockerFile
+
+```dockerfile
+# ./Dockerfile
+
+FROM php:apache
+
+RUN apt-get update -y && apt-get upgrade -y
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+```
+
+###Update `docker-compose.yml`
+
+```yaml
+...
+
+services:
+  app:
+    # image: php:apache -- REMOVE THIS LINE
+    build: ./ #ADD THIS LINE
+    
+    ...
+```
+
+##Restart docker-compose
+
+* Shutdown the active docker-compose `ctrl+x`
+* Run docker again: `docker-compose up`
 
 `git checkout step3`
