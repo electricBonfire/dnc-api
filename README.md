@@ -60,7 +60,7 @@ printf('Hello %s', $name);
 * check the app: `http://localhost`
 
 
-##Building Own Own Docker Image
+## Building Own Own Docker Image
   
 The DockerFile
 
@@ -74,7 +74,7 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
-###Update `docker-compose.yml`
+### Update `docker-compose.yml`
 
 ```yaml
 ...
@@ -87,7 +87,7 @@ services:
     ...
 ```
 
-##Restart docker-compose
+## Restart docker-compose
 
 * Shutdown the active docker-compose `ctrl+x`
 * Run docker again: `docker-compose up`
