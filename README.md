@@ -87,6 +87,15 @@ services:
     ...
 ```
 
+### Create .dockerignore
+
+```
+.git
+.gitignore
+docker-compose.yml
+docker/db
+```
+
 ## Restart docker-compose
 
 * Shutdown the active docker-compose `ctrl+x`
