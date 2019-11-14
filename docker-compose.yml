@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  app:
+    image: php:apache
+    ports:
+      - 8012:80
+    volumes:
+      - ./:/var/www/html
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: D&CR0ckz!
+    volumes:
+      - ./docker/db:/var/lib/mysql:rw
+    ports:
+      - 3307:3306

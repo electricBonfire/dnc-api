@@ -1,37 +1,62 @@
 # DNC API
 
-DNC is a REST API we will be building in PHP
+##Working with Docker
+###Prerequisites
+* Knowledge of Linux
+* System Admin / DevOPs Tasks
 
-Some Tools / Concepts We Will Be Using
+## Building our `LAMP` Stack
 
-* Docker / Containerization
-* Composer / Package Management
-* MySQL / Database
-* Symfony4 / PHP Components
-* Doctrine / ORM
-* Api-platform / Framework
-* HTTP/2 / Web Protocol
-* Mercure Hub / Server Sent Events
+### Files needed
 
-## What is a REST API
-REST, or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other.
+#### docker folder
+`./docker`
 
-### Why REST?
-By separating the user interface concerns from the data storage concerns, we improve the portability of the user interface across multiple platforms and improve scalability by simplifying the server components.
+#### .gitignore
 
-### REST Fundamentals
-* Resources
-* Resource Methods
+```
+...
+docker/db
+...
+```
 
-## What is Docker
-Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.
 
-### Why Docker?
+#### docker-compose.yml
+```
+// ./docker-compose.yml
 
-* Consistency
-* Portability
+version: '3.4'
 
-## Lets Get Started!
-(Download Docker)
+services:
+  app:
+    image: php:apache
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: D&CR0ckz!
+    volumes:
+      - ./docker/db:/var/lib/mysql:rw
+    ports:
+      - 3306:3306
+```
 
-`git checkout step2`
+#### index.php
+
+```
+// ./index.php
+
+<?php
+
+$name = $_GET['name'];
+
+printf('Hello %s', $name);
+```
+* run `docker-compose up`
+* connect to your database
+* check the app: `http://localhost`
+
+`git checkout step3`
