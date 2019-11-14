@@ -4,7 +4,7 @@ services:
   app:
     build: ./
     ports:
-      - 80:80
+      - 8012:80
     volumes:
       - ./:/var/www/html
   db:
@@ -14,4 +14,4 @@ services:
     volumes:
       - ./docker/db:/var/lib/mysql:rw
     ports:
-      - 3306:3306
+      - 3307:3306

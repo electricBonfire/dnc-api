@@ -92,4 +92,19 @@ services:
 * Shutdown the active docker-compose `ctrl+x`
 * Run docker again: `docker-compose up`
 
+## Adding The Symfony cli
+
+edit Dockerfile
+
+```yaml
+   ...
+   RUN apt install -y git
+   RUN curl -sS https://get.symfony.com/cli/installer | bash 
+```
+
+## Restart and Rebuild our containers
+
+* Shutdown the active docker-compose ctrl+x
+* Run docker-compose with the build flag: `docker-compose up --build`
+
 `git checkout step3`
