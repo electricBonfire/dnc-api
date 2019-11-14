@@ -1,45 +1,54 @@
 # DNC API
 
-## Starting From Scratch
+## The Symfony Console
+lets checkout the symfony console run `docker exec dnc-api_app_1 ./bin/console` 
 
-Remove the following files and folders
+## Environments (DOTENV)
 
-* vendor/
-* composer.json
-* composer.lock
-* index.php
+Open `.env` and take a look at the configuration
 
-## The Symfony Skeleton / Installer
+Create a new file called `.env.local`
 
- * run the symfony installer inside docker `docker exec dnc-api_app_1 symfony new dnc`
- * > Ignore the git error we are using our own git repo and do not need to create a new one.
- * open `./dnc/.gitignore` and add the contents into our `./.gitignore` file.
- * delete the `./dnc/.gitignore` file
- * Move all of the files out of the dnc folder and into our project directory
- * Delete the `./dnc` folder
+## Installing Additional Symfony Components (Flex)
 
-### Updating our Docker Container
+Lets install the api platform
 
-#### create a new file: `./docker/vhost.conf`
+`docker exec dnc-api_app_1 composer req api`
 
-```apacheconfig
-<VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html/public
+Now lets checkout our `.env` file again
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
+Copy `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7` and add it to `.env.local`
 
-#### Update our Dockerfile
+Update the database credentials to match our `docker-compose` environment vars (`.env.local`)
+
+`DATABASE_URL=mysql://root:D&CR0ckz!@db:3306/dnc?serverVersion=5.7`
+
+##Lets Create our Database
+
+`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
+
+OH NO!
+
+Lets update our `Dockerfile`
+
 ```dockerfile
-#...
-COPY ./docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN apt-get update -y && apt-get upgrade -y && apt install -y \
+        git \
+        zip \
+        unzip \
+        zlib1g-dev \
+        libicu-dev \
+        g++ \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install pdo_mysql        ### <---ADDING THIS LINE
 ```
 
-#### Rebuild our container `docker-compose up --build`
+And lets rebuild `docker-compose up --build`
 
-#### Load The App: `http://localhost`
+Ok lets try that again
 
-`git checkout step5`
+`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
+
+
+`git checkout step6`
