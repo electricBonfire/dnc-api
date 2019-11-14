@@ -6,7 +6,6 @@ Some Tools / Concepts We Will Be Using
 
 * Docker / Containerization
 * Composer / Package Management
-* MySQL / Database
 * Symfony4 / PHP Components
 * Doctrine / ORM
 * Api-platform / Framework
