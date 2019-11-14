@@ -1,5 +1,12 @@
 <?php
 
-$name = $_GET['name'];
+require_once 'vendor/autoload.php';
 
-printf('Hello %s', $name);
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$request = Request::createFromGlobals();
+
+$name = $request->query->get('name', "World");
+
+return new Response(printf('Hello %s', $name));
