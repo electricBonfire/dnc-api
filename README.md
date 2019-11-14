@@ -1,54 +1,36 @@
 # DNC API
 
-## The Symfony Console
-lets checkout the symfony console run `docker exec dnc-api_app_1 ./bin/console` 
+## Doctrine (ORM)
 
-## Environments (DOTENV)
+> Object-Relational Mapping (ORM) is a technique that lets you query and manipulate data from a database using an object-oriented paradigm. When talking about ORM, most people are referring to a library that implements the Object-Relational Mapping technique, hence the phrase "an ORM".
 
-Open `.env` and take a look at the configuration
+### First lets install the "maker bundle" 
 
-Create a new file called `.env.local`
+`docker exec dnc-api_app_1 composer require symfony/maker-bundle migrations --dev`
 
-## Installing Additional Symfony Components (Flex)
+### Lets create an "Entity"
 
-Lets install the api platform
+`docker exec dnc-api_app_1 ./bin/console make:entity`
 
-`docker exec dnc-api_app_1 composer req api`
+It doesn't work! Lets add some flags to docker exec:
 
-Now lets checkout our `.env` file again
+`docker exec -it dnc-api_app_1 ./bin/console make:entity`
 
-Copy `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7` and add it to `.env.local`
+Go through the prompts and review the generated files in `/src/Entity` and `/src/Repository`
 
-Update the database credentials to match our `docker-compose` environment vars (`.env.local`)
+### Updating the DB
 
-`DATABASE_URL=mysql://root:D&CR0ckz!@db:3306/dnc?serverVersion=5.7`
+First we need to generate code to update our db:
 
-##Lets Create our Database
+`docker exec dnc-api_app_1 ./bin/console make:migration`
 
-`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
+Check out the new Migration file in `/src/Migrations`
 
-OH NO!
+## Lets Create Some Routes
+create a new file `/src/Controller/DncController.php`
 
-Lets update our `Dockerfile`
+```php
 
-```dockerfile
-RUN apt-get update -y && apt-get upgrade -y && apt install -y \
-        git \
-        zip \
-        unzip \
-        zlib1g-dev \
-        libicu-dev \
-        g++ \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && docker-php-ext-install pdo_mysql        ### <---ADDING THIS LINE
 ```
 
-And lets rebuild `docker-compose up --build`
-
-Ok lets try that again
-
-`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
-
-
-`git checkout step6`
+`git checkout step7`
