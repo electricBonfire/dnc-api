@@ -1,0 +1,13 @@
+{
+    "name": "electricbonfire/dnc-api",
+    "description": "An API for D&C",
+    "authors": [
+        {
+            "name": "Shawn Northrop",
+            "email": "electricBonfire@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/http-foundation": "^4.3"
+    }
+}
