@@ -16,9 +16,17 @@ RUN a2enmod rewrite
 #...
 ```
 
-## Doctrine (ORM)
+### Update `./docker/vhost.conf`
+```apacheconfig
+    <VirtualHost *:80>
+        #...
+        <Directory /var/www/html/public >
+            AllowOverride All
+        </Directory>
+    </VirtualHost>    
+```
 
-> Object-Relational Mapping (ORM) is a technique that lets you query and manipulate data from a database using an object-oriented paradigm. When talking about ORM, most people are referring to a library that implements the Object-Relational Mapping technique, hence the phrase "an ORM".
+## Doctrine (ORM)
 
 ### First lets install the "maker bundle" 
 
@@ -41,15 +49,5 @@ First we need to generate code to update our db:
 `docker exec dnc-api_app_1 ./bin/console make:migration`
 
 Check out the new Migration file in `/src/Migrations`
-
-### Update `./docker/vhost.conf`
-```apacheconfig
-    <VirtualHost *:80>
-        #...
-        <Directory /var/www/html/public >
-            AllowOverride All
-        </Directory>
-    </VirtualHost>    
-```
 
 `git checkout step7`
