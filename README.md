@@ -26,6 +26,63 @@ RUN a2enmod rewrite
     </VirtualHost>    
 ```
 
+## Routes / Controllers / MVC
+
+### Create `./src/Controller/DNCController.php`
+
+```php
+<?php
+// ./src/Controller/DNCController.php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class DNCController extends AbstractController
+{
+
+    /**
+     * @Route("/hello")
+     */
+    public function hello(Request $request)
+    {
+        $name = $request->query->get('name');
+
+        return new Response("hello ".$name);
+    }
+
+    /**
+     * @Route("hey")
+     */
+    public function hey(Request $request)
+    {
+        $name = $request->query->get('name');
+
+        return new Response($this->renderView('hey.html.twig', ['name' => $name]));
+    }
+
+    /**
+     * @Route("/howdy/{name}")
+     */
+    public function howdy(string $name)
+    {
+        return new Response($this->renderView('hey.html.twig', ['name' => $name]));
+    }
+}
+```
+
+### Create `./templates/hey.html.twig`
+```twig
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Hey {{ name }}
+{% endblock %}
+```
+
 ## Doctrine (ORM)
 
 ### First lets install the "maker bundle" 
@@ -51,3 +108,11 @@ First we need to generate code to update our db:
 Check out the new Migration file in `/src/Migrations`
 
 `git checkout step7`
+
+
+## CRUD
+
+Create Read Update Delete (CRUD)
+
+### Performing Opertaions on Our Entity
+
