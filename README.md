@@ -63,6 +63,10 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash
 ### Rebuild Docker 
 * `docker-compose up --build`
 
+### Install our composer package again
+
+`docker exec dnc-api_app_1  composer require symfony/http-foundation`
+
 ## PSR, Autoloading and Namespaces
 
 * [PSR: PHP Standards Recommendations](https://www.php-fig.org/psr/)
