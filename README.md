@@ -7,12 +7,10 @@
 
 ## Building our `LAMP` Stack
 
-### Files needed
+#### Create a docker folder
+`./docker/`
 
-#### docker folder
-`./docker`
-
-#### .gitignore
+#### Update `.gitignore`
 
 ```
 ...
@@ -21,7 +19,7 @@ docker/db
 ```
 
 
-#### docker-compose.yml
+#### Create `docker-compose.yml`
 ```yaml
 // ./docker-compose.yml
 
@@ -44,7 +42,7 @@ services:
       - 3306:3306
 ```
 
-#### index.php
+#### Create `index.php`
 
 ```php
 // ./index.php
