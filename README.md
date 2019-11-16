@@ -116,3 +116,60 @@ Create Read Update Delete (CRUD)
 
 ### Performing Opertaions on Our Entity
 
+## Create `./src/Controller/EventController.php`
+```php
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Event;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class EventController extends AbstractController
+{
+
+    /**
+     * @Route("/events", methods={"POST"})
+     */
+    public function createEvent()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $event = new Event();
+        $event->setName('Drink And Code');
+        $event->setStartsAt(new \DateTime());
+
+        $em->persist($event);
+        $em->flush();
+        
+        return new Response('', 201);
+    }
+
+    /**
+     * @Route("/events")
+     */
+    public function getEvents()
+    {
+        $em     = $this->getDoctrine()->getManager();
+        $events = $em->getRepository(Event::class)->findAll();
+
+        return new Response($this->renderView('events.html.twig', ['events' => $events]));
+    }
+}
+```
+
+## Create `./templates/events.html.twig`
+
+```twig
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <ul>
+    {% for event in events %}
+        <li>{{ event.name }} - {{ event.startsAt|date }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+```

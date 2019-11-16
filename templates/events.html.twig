@@ -1,8 +1,9 @@
 {%  extends 'base.html.twig' %}
 
 {% block body %}
-
-    {% for event in event %}
-        {{ event.name }} - {{ event.date|date }}
+    <ul>
+    {% for event in events %}
+        <li>{{ event.name }} - {{ event.startsAt|date }}</li>
     {% endfor %}
+    </ul>
 {% endblock %}
