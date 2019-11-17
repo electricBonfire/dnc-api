@@ -1,7 +1,5 @@
 # DNC API
 
-View the Readme for the `step1` branch.
- 
 When checking out a branch, all code examples shown in that branch are already completed.
 
 I recommend starting on `master` and follow along with the `README` for `step1`.
