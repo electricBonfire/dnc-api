@@ -9,6 +9,7 @@ Some Tools / Concepts We Will Be Using
 * Symfony4 / PHP Components
 * Doctrine / ORM
 * Api-platform / Framework
+* JSON / JSON-LD / HYDRA / Additional Formats
 * HTTP/2 / Web Protocol
 * Mercure Hub / Server Sent Events
 
