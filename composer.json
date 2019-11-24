@@ -15,6 +15,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-migrations-bundle": "^2.1",
+        "symfony/debug-pack": "^1.0",
         "symfony/maker-bundle": "^1.14"
     },
     "config": {
