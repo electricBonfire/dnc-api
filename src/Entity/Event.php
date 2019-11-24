@@ -16,7 +16,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      normalizationContext={"groups"={"event:read"}},
  *      denormalizationContext={"groups"={"event:write"}}
  * )
- * @ApiFilter(SearchFilter::class, properties={"name": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "name": "partial",
+ *     "speakers": "exact",
+ *     "speakers.username": "partial"
+ * })
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */

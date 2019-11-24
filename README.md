@@ -121,7 +121,7 @@ class Event
 ```
 ## Adding Filters
 
-### Edit `./src/Entity/Event`
+### Edit `./src/Entity/Event.php`
 ```php
 
 use ApiPlatform\Core\Annotation\ApiFilter;
@@ -134,7 +134,11 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *      normalizationContext={"groups"={"event:read"}},
  *      denormalizationContext={"groups"={"event:write"}}
  * )
- * @ApiFilter(SearchFilter::class, properties={"name": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *   "name": "partial",
+ *   "speakers": "exact",
+ *   "speakers.username": "partial"
+ * })
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
@@ -146,3 +150,5 @@ Go to
 * `http://localhost/api/events.json?name=code`
 * `http://localhost/api/events.json?properties[]=name`
 * `http://localhost/api/events.jsonld?properties[]=name&properties[speakers]=username`
+* `http://localhost/api/events.jsonld?speakers[]=/api/users/1`
+* `http://localhost/api/events?speakers.username=sha`
