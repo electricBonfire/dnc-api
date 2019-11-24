@@ -1,154 +1,46 @@
 # DNC API
 
-## API Platform
+## Formats
 
-visit `localhost/api/docs`
+* JSON / JSON LD
+* HYDRA
 
-* use the interface to add some events
+### Edit `./config/packages/api_platform.yml`
 
-## Lets add the profiler
-
-run `docker exec dnc-api_app_1 composer require debug --dev`
-
-## Lets create a User
-
-Run The following commands and go through the prompts
-
-```bash
-docker exec -it dnc-api_app_1 ./bin/console make:user
-
-docker exec -it dnc-api_app_1 ./bin/console make:entity
-
-docker exec -it dnc-api_app_1 ./bin/console make:migration
-
-docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate
+```yaml
+api_platform:
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    formats:
+        html:
+            mime_types:
+                - text/html
+        json:
+            mime_types:
+                - application/json
+        jsonld:
+            mime_types:
+                - application/ld+json
+        jsonhal:
+            mime_types:
+                - application/hal+json
+        csv:
+            mime_types:
+                - text/csv
+    collection:
+        pagination:
+            items_per_page: 1
 ```
 
-## Lets create some relations (event speakers)
+# GraphQL
 
-run `docker exec -it dnc-api_app_1 ./bin/console make:entity`
+run 
 
-Update your `Event` add a `ManyToMany` to `User`
+* `docker exec -it dnc-api_app_1 composer req webonyx/graphql-php`
+* `docker exec -it dnc-api_app_1 ./bin/console cache:clear`
 
-Create a migration `docker exec -it dnc-api_app_1 ./bin/console make:migration`
-
-Update the database `docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate`
-
-Tag `/src/Entity/User` as an ApiResource
-
-```php
- // ./src/Entity/User
- 
- ...
- use ApiPlatform\Core\Annotation\ApiResource;
- ...
- 
- /**
-  * @ApiResource()       // <----- ADD THIS LINE
-  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
-  */
- class User implements UserInterface 
- ...
-```
-
-## Lets create some Users
-
-* To encrypt a password run `docker exec -it dnc-api_app_1 ./bin/console security:encode-password`
-* Use this password to create a user through the api interface
-
-
-## Update an Event Resource to include speakers
-
-* When relating Resources you must use the `@id` property, aka the `IRI`
-
-## Serialization Groups
-
-### Update `./src/Entity/User.php`
-
-```php
-use Symfony\Component\Serializer\Annotation\Groups;
-...
-
-/*
- * @ApiResource(
- *     normalizationContext={"groups"={"user:read"}}
- *     denormalizationContext={"groups"={"user:write"}}
- * )
- */
- 
- class User
- {
- 
-     /**
-      * @ORM\Column(type="string", length=180, unique=true)
-      * @Groups({"user:read, user:write"})
-      */
-     private $username;
-```
-
-### Update `./src/Entity/Event.php`
-```php
-/**
- * @ApiResource(
- *      normalizationContext={"groups"={"event:read"}},
- *      denormalizationContext={"groups"={"event:write"}}
- * )
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- */
-class Event
-{
-    ...
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"event:read", "event:write", "user:read"})
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @Groups({"event:read", "event:write", "user:read"})
-     */
-    private $startsAt;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="events")
-     * @Groups({"event:read", "event:write"})
-     */
-    private $speakers;
-    
-    ...
-```
-## Adding Filters
-
-### Edit `./src/Entity/Event.php`
-```php
-
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
-
-
-/**
- * @ApiResource(
- *      normalizationContext={"groups"={"event:read"}},
- *      denormalizationContext={"groups"={"event:write"}}
- * )
- * @ApiFilter(SearchFilter::class, properties={
- *   "name": "partial",
- *   "speakers": "exact",
- *   "speakers.username": "partial"
- * })
- * @ApiFilter(PropertyFilter::class)
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- */
-class Event
-{
-```
-Go to 
-
-* `http://localhost/api/events.json?name=code`
-* `http://localhost/api/events.json?properties[]=name`
-* `http://localhost/api/events.jsonld?properties[]=name&properties[speakers]=username`
-* `http://localhost/api/events.jsonld?speakers[]=/api/users/1`
-* `http://localhost/api/events?speakers.username=sha`
+* Go to http://localhost/api/graphql
