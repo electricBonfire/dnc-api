@@ -10,8 +10,6 @@ Some Tools / Concepts We Will Be Using
 * Doctrine / ORM
 * Api-platform / Framework
 * JSON / JSON-LD / HYDRA / Additional Formats
-* HTTP/2 / Web Protocol
-* Mercure Hub / Server Sent Events
 
 ## What is a REST API
 REST, or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other.
