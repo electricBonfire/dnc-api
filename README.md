@@ -23,7 +23,7 @@ Update the database credentials to match our `docker-compose` environment vars (
 
 `DATABASE_URL=mysql://root:D&CR0ckz!@db:3306/dnc?serverVersion=5.7`
 
-##Lets Create our Database
+## Lets Create our Database
 
 `docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
 
