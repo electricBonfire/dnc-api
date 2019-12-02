@@ -99,6 +99,15 @@ It doesn't work! Lets add some flags to docker exec:
 
 Go through the prompts and review the generated files in `/src/Entity` and `/src/Repository`
 
+* Class Name: `Event`
+* New Property Name: `name`
+    * Field Type: `string`
+    * Field Length `255`
+    * nullable `no`
+* New Property Name: `startsAt`
+    * Field Type: `datetime`
+    * nullable `yes`
+
 ### Updating the DB
 
 First we need to generate code to update our db:
