@@ -6,7 +6,7 @@ We need to enable rewrite on apache so that all of our requests are sent to our 
 
 ### Install the .htaccess file 
 
-`docker exec dnc-api_app_1 composer req symfony/apache-pack`
+`docker exec -it dnc-api_app_1 composer req symfony/apache-pack`
 
 ### Edit `Dockerfile`
 
