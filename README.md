@@ -116,9 +116,6 @@ First we need to generate code to update our db:
 
 Check out the new Migration file in `/src/Migrations`
 
-`git checkout step7`
-
-
 ## CRUD
 
 Create Read Update Delete (CRUD)
@@ -182,3 +179,6 @@ class EventController extends AbstractController
     </ul>
 {% endblock %}
 ```
+
+
+`git checkout step7`
