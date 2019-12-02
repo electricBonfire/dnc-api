@@ -49,7 +49,7 @@ class DNCController extends AbstractController
      */
     public function hello(Request $request)
     {
-        $name = $request->query->get('name');
+        $name = $request->query->get('name', 'Drink And Code');
 
         return new Response("hello ".$name);
     }
@@ -59,7 +59,7 @@ class DNCController extends AbstractController
      */
     public function hey(Request $request)
     {
-        $name = $request->query->get('name');
+        $name = $request->query->get('name', 'Drink And Code');
 
         return new Response($this->renderView('hey.html.twig', ['name' => $name]));
     }
