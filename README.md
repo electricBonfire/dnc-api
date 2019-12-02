@@ -14,25 +14,49 @@ run `docker exec dnc-api_app_1 composer require debug --dev`
 
 Run The following commands and go through the prompts
 
-```bash
-docker exec -it dnc-api_app_1 ./bin/console make:user
+`docker exec -it dnc-api_app_1 ./bin/console make:user`
+* Name of class: `User`
+* Store data in the database `yes`
+* Display name: `username`
+* has passwords `yes`
 
-docker exec -it dnc-api_app_1 ./bin/console make:entity
+`docker exec -it dnc-api_app_1 ./bin/console make:entity`
+* Class Name: `User`
+* New Property: `firstName`
+    * Type: `string`
+    * Length: `255`
+    * Nullable: `no`
+* New Property: `lastName`
+    * Type: `string`
+    * Length: `255`
+    * Nullable: `no`
+* New Property: `email`
+    * Type: `string`
+    * Length: `255`
+    * Nullable: `no`
 
-docker exec -it dnc-api_app_1 ./bin/console make:migration
+`docker exec -it dnc-api_app_1 ./bin/console make:migration`
 
-docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate
-```
+`docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate`
 
 ## Lets create some relations (event speakers)
 
 run `docker exec -it dnc-api_app_1 ./bin/console make:entity`
+
+* Class Name: `Event`
+* New Property: `speakers`
+    * Field Type: `ManyToMany`
+    * Related Class: `User`
+    * Add Property to User: `yes`
+    * New Field Name: `eventsf`
 
 Update your `Event` add a `ManyToMany` to `User`
 
 Create a migration `docker exec -it dnc-api_app_1 ./bin/console make:migration`
 
 Update the database `docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate`
+
+## Lets create some Users
 
 Tag `/src/Entity/User` as an ApiResource
 
@@ -50,8 +74,6 @@ Tag `/src/Entity/User` as an ApiResource
  class User implements UserInterface 
  ...
 ```
-
-## Lets create some Users
 
 * To encrypt a password run `docker exec -it dnc-api_app_1 ./bin/console security:encode-password`
 * Use this password to create a user through the api interface
