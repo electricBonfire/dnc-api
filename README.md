@@ -8,19 +8,19 @@ visit `localhost/api/docs`
 
 ## Lets add the profiler
 
-run `docker exec dnc-api_app_1 composer require debug --dev`
+run `docker exec dnc-api composer require debug --dev`
 
 ## Lets create a User
 
 Run The following commands and go through the prompts
 
-`docker exec -it dnc-api_app_1 ./bin/console make:user`
+`docker exec -it dnc-api ./bin/console make:user`
 * Name of class: `User`
 * Store data in the database `yes`
 * Display name: `username`
 * has passwords `yes`
 
-`docker exec -it dnc-api_app_1 ./bin/console make:entity`
+`docker exec -it dnc-api ./bin/console make:entity`
 * Class Name: `User`
 * New Property: `firstName`
     * Type: `string`
@@ -35,13 +35,13 @@ Run The following commands and go through the prompts
     * Length: `255`
     * Nullable: `no`
 
-`docker exec -it dnc-api_app_1 ./bin/console make:migration`
+`docker exec -it dnc-api ./bin/console make:migration`
 
-`docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate`
+`docker exec -it dnc-api ./bin/console doctrine:migrations:migrate`
 
 ## Lets create some relations (event speakers)
 
-run `docker exec -it dnc-api_app_1 ./bin/console make:entity`
+run `docker exec -it dnc-api ./bin/console make:entity`
 
 * Class Name: `Event`
 * New Property: `speakers`
@@ -52,9 +52,9 @@ run `docker exec -it dnc-api_app_1 ./bin/console make:entity`
 
 Update your `Event` add a `ManyToMany` to `User`
 
-Create a migration `docker exec -it dnc-api_app_1 ./bin/console make:migration`
+Create a migration `docker exec -it dnc-api ./bin/console make:migration`
 
-Update the database `docker exec -it dnc-api_app_1 ./bin/console doctrine:migrations:migrate`
+Update the database `docker exec -it dnc-api ./bin/console doctrine:migrations:migrate`
 
 ## Lets create some Users
 
@@ -75,7 +75,7 @@ Tag `/src/Entity/User` as an ApiResource
  ...
 ```
 
-* To encrypt a password run `docker exec -it dnc-api_app_1 ./bin/console security:encode-password`
+* To encrypt a password run `docker exec -it dnc-api ./bin/console security:encode-password`
 * Use this password to create a user through the api interface
 
 
