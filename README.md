@@ -6,7 +6,7 @@ We need to enable rewrite on apache so that all of our requests are sent to our 
 
 ### Install the .htaccess file 
 
-`docker exec -it dnc-api_app_1 composer req symfony/apache-pack`
+`docker exec -it dnc-api composer req symfony/apache-pack`
 
 ### Edit `Dockerfile`
 
@@ -87,15 +87,15 @@ class DNCController extends AbstractController
 
 ### First lets install the "maker bundle" 
 
-`docker exec dnc-api_app_1 composer require symfony/maker-bundle migrations --dev`
+`docker exec dnc-api composer require symfony/maker-bundle migrations --dev`
 
 ### Lets create an "Entity"
 
-`docker exec dnc-api_app_1 ./bin/console make:entity`
+`docker exec dnc-api ./bin/console make:entity`
 
 It doesn't work! Lets add some flags to docker exec:
 
-`docker exec -it dnc-api_app_1 ./bin/console make:entity`
+`docker exec -it dnc-api ./bin/console make:entity`
 
 Go through the prompts and review the generated files in `/src/Entity` and `/src/Repository`
 
@@ -112,7 +112,7 @@ Go through the prompts and review the generated files in `/src/Entity` and `/src
 
 First we need to generate code to update our db:
 
-`docker exec dnc-api_app_1 ./bin/console make:migration`
+`docker exec dnc-api ./bin/console make:migration`
 
 Check out the new Migration file in `/src/Migrations`
 
