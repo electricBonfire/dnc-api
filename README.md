@@ -39,7 +39,7 @@ A package manager or package-management system is a collection of software tools
 * Components are used By Many other popular Frameworks
 
 
-To Install the http-foundation component run: `docker exec dnc-api_app_1  composer require symfony/http-foundation`
+To Install the http-foundation component run: `docker exec dnc-api  composer require symfony/http-foundation`
 
 ### update Dockerfile to add required dependencies
 
@@ -66,7 +66,7 @@ RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 ### Install our composer package again
 
-`docker exec dnc-api_app_1  composer require symfony/http-foundation`
+`docker exec dnc-api  composer require symfony/http-foundation`
 
 ## PSR, Autoloading and Namespaces
 
