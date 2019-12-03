@@ -26,17 +26,17 @@ A package manager or package-management system is a collection of software tools
 ...
 ```
 
-## Installing Symfony Components
+## Installing Packages
 
-### Why Symfony
-
-* Don't reinvent the wheel
-* Great Community Support
-* Components are used By Many other popular Frameworks
 
 > ### Running Commands Inside Docker Containers
 > * View running containers `docker ps`
 > * To Execute a command inside a container run `docker exec  <container_name> <command> <parameters>`
+
+### Symfony
+* Don't reinvent the wheel
+* Great Community Support
+* Components are used By Many other popular Frameworks
 
 
 To Install the http-foundation component run: `docker exec dnc-api_app_1  composer require symfony/http-foundation`
