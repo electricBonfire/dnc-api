@@ -11,7 +11,7 @@ Remove the following files and folders
 
 ## The Symfony Skeleton / Installer
 
- * run the symfony installer inside docker `docker exec dnc-api_app_1 symfony new dnc`
+ * run the symfony installer inside docker `docker exec dnc-api symfony new dnc`
  * > Ignore the git error we are using our own git repo and do not need to create a new one.
  * open `./dnc/.gitignore` and add the contents into our `./.gitignore` file.
  * delete the `./dnc/.gitignore` file
