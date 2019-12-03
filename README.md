@@ -40,7 +40,7 @@ api_platform:
 
 run 
 
-* `docker exec -it dnc-api_app_1 composer req webonyx/graphql-php`
-* `docker exec -it dnc-api_app_1 ./bin/console cache:clear`
+* `docker exec -it dnc-api composer req webonyx/graphql-php`
+* `docker exec -it dnc-api ./bin/console cache:clear`
 
 * Go to http://localhost/api/graphql
