@@ -1,7 +1,7 @@
 # DNC API
 
 ## The Symfony Console
-lets checkout the symfony console run `docker exec dnc-api_app_1 ./bin/console` 
+lets checkout the symfony console run `docker exec dnc-api ./bin/console` 
 
 ## Environments (DOTENV)
 
@@ -13,7 +13,7 @@ Create a new file called `.env.local`
 
 Lets install the api platform
 
-`docker exec dnc-api_app_1 composer req api`
+`docker exec dnc-api composer req api`
 
 Now lets checkout our `.env` file again
 
@@ -25,7 +25,7 @@ Update the database credentials to match our `docker-compose` environment vars (
 
 ## Lets Create our Database
 
-`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
+`docker exec dnc-api ./bin/console doctrine:database:create`
 
 OH NO!
 
@@ -48,7 +48,7 @@ And lets rebuild `docker-compose up --build`
 
 Ok lets try that again
 
-`docker exec dnc-api_app_1 ./bin/console doctrine:database:create`
+`docker exec dnc-api ./bin/console doctrine:database:create`
 
 
 `git checkout step6`
