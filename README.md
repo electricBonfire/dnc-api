@@ -14,13 +14,17 @@ A package manager or package-management system is a collection of software tools
 * apt
 * yum
 
+---
+
 > # Running Commands Inside Docker Containers
 > * View running containers `docker ps`
 > * To Execute a command inside a container run `docker exec  <container_name> <command> <parameters>`
 
+---
+
 ## Initialize Composer
 
-* run `composer init`
+* run `docker exec dnc-api composer init`
 
 ## Update `.gitignore`
 
