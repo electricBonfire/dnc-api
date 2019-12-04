@@ -14,6 +14,10 @@ A package manager or package-management system is a collection of software tools
 * apt
 * yum
 
+> # Running Commands Inside Docker Containers
+> * View running containers `docker ps`
+> * To Execute a command inside a container run `docker exec  <container_name> <command> <parameters>`
+
 ## Initialize Composer
 
 * run `composer init`
@@ -27,11 +31,6 @@ A package manager or package-management system is a collection of software tools
 ```
 
 ## Installing Packages
-
-
-> ### Running Commands Inside Docker Containers
-> * View running containers `docker ps`
-> * To Execute a command inside a container run `docker exec  <container_name> <command> <parameters>`
 
 ### Symfony
 * Don't reinvent the wheel
